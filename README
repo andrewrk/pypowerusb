@@ -1,0 +1,14 @@
+Author:
+    Andrew Kelley
+    superjoe30@gmail.com
+
+Depends on hardware:
+    http://www.pwrusb.com/
+
+Usage:
+    import powerusb
+    powerusb.initialize()
+    port_1 = True # on
+    port_2 = False # off
+    powerusb.set_state(port_1, port_2)
+    powerusb.terminate()
