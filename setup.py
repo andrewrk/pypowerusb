@@ -23,7 +23,7 @@ powerusb_extension = Extension(
 
 setup(
     name='powerusb',
-    version='0.1',
+    version='0.2',
     author="Andrew Kelley",
     author_email="superjoe30@gmail.com",
     url="http://github.com/superjoe30/pypowerusb",
