@@ -2,22 +2,44 @@
 #define _PWRUSBINC_H_
 
 #ifdef __cplusplus
-#define EXTERN_C extern "c"
+#define EXTERN_C extern "C"
 #else
 #define EXTERN_C 
 #endif
 
 #ifdef PWRUSBDLL_EXPORTS
-#define class_declspec EXTERN_C __declspec(dllexport)
+#define CLASS_DECLSPEC EXTERN_C __declspec(dllexport)
 #else
-#define class_declspec EXTERN_C __declspec(dllimport)
+#define CLASS_DECLSPEC EXTERN_C __declspec(dllimport)
 #endif
 
-class_declspec int InitPowerUSB(int *mode);
-class_declspec int ClosePowerUSB();
-class_declspec int CheckStatusPowereUSB();
-class_declspec int SetPortPowerUSB(int port1, int port2);
-class_declspec int SetDefaultStatePowerUSB(int state1, int state2);
+// Functions for Version 1 and 2 Firmware PowerUSB
+///////////////////////////////////////////////////////////
+// Main Power Strip functions
+CLASS_DECLSPEC int InitPowerUSB(int *mode);
+CLASS_DECLSPEC int ClosePowerUSB();
+CLASS_DECLSPEC int SetCurrentPowerUSB(int count);
+CLASS_DECLSPEC int CheckStatusPowereUSB();
+CLASS_DECLSPEC int SetPortPowerUSB(int port1, int port2);
+CLASS_DECLSPEC int SetDefaultStatePowerUSB(int state1, int state2);
+
+
+// Functions for Version 2 and later Firmware PowerUSB
+///////////////////////////////////////////////////////////
+// these functions are available starting with Nov 2010 release of PowerUSB
+CLASS_DECLSPEC int ReadPortState(int *state1, int *state2);
+CLASS_DECLSPEC int ReadDefaultPortState(int *state1, int *state2);
+CLASS_DECLSPEC int GetFirmwareVersion();
+
+
+// Watchdog related functions. Available only for Watchdog firmware version of the PowerUSB
+CLASS_DECLSPEC int StartWatchdogTimer(int HbTime, int numHbMisses, int resetTime);
+CLASS_DECLSPEC int StopWatchdogTimer();
+CLASS_DECLSPEC int GetWatchdogStatus();	// returns 0=IDLE(off), 1=Running, 2=Resetting
+CLASS_DECLSPEC int SendHeartBeat();
+CLASS_DECLSPEC int PowerCycle(int resetTime);
+
+
 
 
 
